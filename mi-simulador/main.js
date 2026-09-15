@@ -1,24 +1,17 @@
-
 const tareas = ["hacer la cama", "sacar la basura", "estudiar", "ir al gimnasio", "lavar los platos"];
-    console.log(tareas);
+alert("Tareas del día: \n" + tareas.join('\n'));
 
 const ultimoElemento = tareas.pop();
-    console.log(`Se ha eliminado el elemento: ${ultimoElemento}`);
-    console.log(tareas);
+    alert("Se ha completado: " + ultimoElemento);
 
-tareas.push("pasear al perro");
-    console.log(tareas);
+tareas.push(prompt("Agrega una nueva tarea."));
 
-tareas.unshift("ir a comprar");
-    console.log(tareas);
-
-
-tareas.splice(1, 1, "lavarse los dientes");
-console.log(tareas);
-
+tareas.unshift(prompt("Agrega otra tarea."));
+    
+tareas.splice(1, 1, (prompt("Ya hiciste la cama, agrega una nueva tarea.")));
 
 function recorrerArray(array) {
-    console.log("Estas son las tareas del día:");
+    console.log("Estas son las tareas pendientes del día:");
     for (const tarea of array) {
         console.log(`- ${tarea}`);
     }
@@ -26,30 +19,38 @@ function recorrerArray(array) {
 recorrerArray(tareas);
 
 
-let buscaElemento = prompt("¿Que tarea estás buscando?").toLowerCase();
+let buscaElemento = prompt("¿Que tarea completaste?").toLowerCase();
 
 if (tareas.includes(buscaElemento)) {
-    console.log(`El elemento "${buscaElemento}" existe en el array.`);
-    console.log(`Se encuentra en la posición: ${tareas.indexOf(buscaElemento)}`);
+    console.log("La tarea " + buscaElemento + " ha sido completada.");
+    console.log("Era la tarea número " + tareas.indexOf(buscaElemento) + " del día");
+     tareas.splice(tareas.indexOf(buscaElemento), 1);
+
 } else {
-    console.log(`El elemento "${buscaElemento}" no existe en el array.`);
+    console.log("La tarea " + buscaElemento + " no corresponde a este día.");
 }
 
-let continuar = true 
+alert("Tareas pendientes del día: \n" + tareas.join('\n'));
 
-while(continuar) {
-    let borrarElemento = prompt("¿Qué tarea ya ha sido completada?").toLowerCase();
-    if(tareas.includes(borrarElemento)) {
-        tareas.splice(tareas.indexOf(borrarElemento), 1);
-        console.log(`El elemento "${borrarElemento}" ha sido eliminado del array.`);
-    } else {
-        console.log(`El elemento "${borrarElemento}" no se encuentra en el array.`);
+let continuar = true;
+
+while (continuar) {
+  let borrarTarea = prompt("¿Completaste otra tarea?").toLowerCase();
+  
+  if (tareas.includes(borrarTarea)) {
+    tareas.splice(tareas.indexOf(borrarTarea), 1);
+    
+    if (tareas.length === 0) {
+      continuar = false;
     }
-    continuar = confirm("¿Quieres eliminar otra tarea de la lista?");
-    console.log(tareas);
+  } else {
+    alert("La tarea " + borrarTarea + " no se encuentra en la lista");
+    continuar = false;
+  }
 }
-
-if (tareas.length === 0) {
-    console.log("¡Felicidades! No hay tareas pendientes.");
+ if (tareas.length === 0) {
+  alert("¡Completaste todas las tareas del día!");
+} else {
+    console.log("Tareas pendientes: \n" + tareas.join('\n'));
+    alert("Tareas pendientes: \n" + tareas.join('\n'));
 }
-
